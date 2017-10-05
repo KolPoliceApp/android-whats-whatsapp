@@ -7,9 +7,9 @@ import java.util.List;
  */
 
 public class ChatConversation {
-    private final String title;
-    private final List<ChatMessage> messages;
-    private final List<String> participants;
+    public final String title;
+    public final List<ChatMessage> messages;
+    public final List<String> participants;
 
     public ChatConversation(String title, List<String> participants, List<ChatMessage> messages) {
         this.title = title;

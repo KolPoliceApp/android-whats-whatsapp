@@ -11,28 +11,30 @@ import java.util.List;
  */
 
 public class MockConversations {
-    public static List<String> participants = new ArrayList<>();
+    private static List<String> participants = new ArrayList<>();
 
-    public static ChatMessage chat1 = new ChatMessage("Alice", "Hey Bob, I have something to tell you.");
-    public static ChatMessage chat2 = new ChatMessage("Bobby", "OK, tell me!");
-    public static ChatMessage chat3 = new ChatMessage("Alice", "We have to be careful. It's a secret.");
-    public static ChatMessage chat4 = new ChatMessage("Bobby", "Hmm. I'm not sure how to send secrets.");
-    public static ChatMessage chat5 = new ChatMessage("Alice", "lol");
-    public static ChatMessage chat6 = new ChatMessage("Bobby", "lol");
-    public static ChatMessage chat7 = new ChatMessage("Alice", "lol");
-    public static ChatMessage chat8 = new ChatMessage("Bobby", "lol");
-    public static ChatMessage chat9 = new ChatMessage("Alice", "lol");
-    public static ChatMessage chat10 = new ChatMessage("Bobby", "lol");
-    public static ChatMessage chat11 = new ChatMessage("Alice", "lol");
-    public static ChatMessage chat12 = new ChatMessage("Bobby", "lol");
+    private static ChatMessage chat1 = new ChatMessage("Alice", "Hey Bob, I have something to tell you.");
+    private static ChatMessage chat2 = new ChatMessage("Bobby", "OK, tell me!");
+    private static ChatMessage chat3 = new ChatMessage("Alice", "We have to be careful. It's a secret.");
+    private static ChatMessage chat4 = new ChatMessage("Bobby", "Hmm. I'm not sure how to send secrets.");
+    private static ChatMessage chat5 = new ChatMessage("Alice", "lol");
+    private static ChatMessage chat6 = new ChatMessage("Bobby", "lol");
+    private static ChatMessage chat7 = new ChatMessage("Alice", "lol");
+    private static ChatMessage chat8 = new ChatMessage("Bobby", "lol");
+    private static ChatMessage chat9 = new ChatMessage("Alice", "lol");
+    private static ChatMessage chat10 = new ChatMessage("Bobby", "lol");
+    private static ChatMessage chat11 = new ChatMessage("Alice", "lol");
+    private static ChatMessage chat12 = new ChatMessage("Bobby", "lol");
 
-    public static List<ChatMessage> emptyConvoMessages = new ArrayList<>();
-    public static List<ChatMessage> shortConvoMessages = new ArrayList<>();
-    public static List<ChatMessage> longConvoMessages = new ArrayList<>();
+    private static List<ChatMessage> emptyConvoMessages = new ArrayList<>();
+    private static List<ChatMessage> shortConvoMessages = new ArrayList<>();
+    private static List<ChatMessage> longConvoMessages = new ArrayList<>();
 
     public static ChatConversation emptyConversation;
     public static ChatConversation shortConversation;
     public static ChatConversation longConversation;
+
+    public static List<ChatConversation> allConversations = new ArrayList<>();
 
     static {
         participants.add("Alice");
@@ -58,5 +60,9 @@ public class MockConversations {
         longConvoMessages.add(chat11);
         longConvoMessages.add(chat12);
         longConversation = new ChatConversation("Long Convo", participants, longConvoMessages);
+
+        allConversations.add(emptyConversation);
+        allConversations.add(shortConversation);
+        allConversations.add(longConversation);
     }
 }
