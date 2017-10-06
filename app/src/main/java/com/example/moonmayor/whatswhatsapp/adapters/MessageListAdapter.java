@@ -80,7 +80,7 @@ public class MessageListAdapter extends ArrayAdapter<ChatMessage> {
         holder.mMessageUsername.setText(message.username);
         holder.mMessageText.setText(message.message);
 
-        String timestamp = (new SimpleDateFormat("YYYY mm/dd HH:mm")).format(new Date(message.timestamp));
+        String timestamp = (new SimpleDateFormat("YYYY MM/dd HH:mm")).format(new Date(message.timestamp));
         holder.mMessageTimestamp.setText(timestamp);
 
         return convertView;
