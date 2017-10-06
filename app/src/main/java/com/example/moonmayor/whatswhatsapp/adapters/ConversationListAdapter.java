@@ -2,15 +2,11 @@ package com.example.moonmayor.whatswhatsapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.moonmayor.whatswhatsapp.ConversationActivity;
@@ -84,9 +80,10 @@ public class ConversationListAdapter extends ArrayAdapter<ChatConversation> {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.chat_conversation, parent, false);
+            convertView.setTag(new ViewHolder(convertView, this.getItem(position)));
         }
 
-        ViewHolder holder = new ViewHolder(convertView, this.getItem(position));
+        ViewHolder holder = (ViewHolder) convertView.getTag();
         return convertView;
     }
 }
