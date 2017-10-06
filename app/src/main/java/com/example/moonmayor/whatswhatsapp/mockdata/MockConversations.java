@@ -65,4 +65,13 @@ public class MockConversations {
         allConversations.add(shortConversation);
         allConversations.add(longConversation);
     }
+
+    public static ChatConversation getConversationByTitle(String title) {
+        for (ChatConversation conversation : allConversations) {
+            if (conversation.title.equals(title)) {
+                return conversation;
+            }
+        }
+        return new ChatConversation();
+    }
 }

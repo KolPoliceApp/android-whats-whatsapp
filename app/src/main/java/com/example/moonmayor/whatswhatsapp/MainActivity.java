@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.moonmayor.whatswhatsapp.adapters.ConversationsAdapter;
+import com.example.moonmayor.whatswhatsapp.adapters.ConversationListAdapter;
 import com.example.moonmayor.whatswhatsapp.mockdata.MockConversations;
 import com.example.moonmayor.whatswhatsapp.models.ChatConversation;
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void attachConversations() {
         List<ChatConversation> conversations = MockConversations.allConversations;
-        mConversationsAdapter = new ConversationsAdapter(this, R.layout.chat_conversation, conversations);
+        mConversationsAdapter = new ConversationListAdapter(this, R.layout.chat_conversation, conversations);
         mConversationsListView = (ListView) findViewById(R.id.conversations);
         mConversationsListView.setAdapter(mConversationsAdapter);
     }

@@ -23,7 +23,7 @@ import java.util.List;
  * Created by moonmayor on 10/4/17.
  */
 
-public class ConversationsAdapter extends ArrayAdapter<ChatConversation> {
+public class ConversationListAdapter extends ArrayAdapter<ChatConversation> {
     private Context mContext;
     private List<ChatConversation> mConversations;
 
@@ -56,7 +56,7 @@ public class ConversationsAdapter extends ArrayAdapter<ChatConversation> {
         }
     }
 
-    public ConversationsAdapter(Context context, int resource, List<ChatConversation> conversations) {
+    public ConversationListAdapter(Context context, int resource, List<ChatConversation> conversations) {
         super(context, resource, conversations);
         mContext = context;
         mConversations = conversations;
