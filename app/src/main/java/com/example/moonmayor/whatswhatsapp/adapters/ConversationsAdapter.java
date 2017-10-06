@@ -1,6 +1,7 @@
 package com.example.moonmayor.whatswhatsapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.moonmayor.whatswhatsapp.ConversationActivity;
 import com.example.moonmayor.whatswhatsapp.R;
 import com.example.moonmayor.whatswhatsapp.models.ChatConversation;
 
@@ -26,15 +28,31 @@ public class ConversationsAdapter extends ArrayAdapter<ChatConversation> {
     private List<ChatConversation> mConversations;
 
     public class ViewHolder {
+        public View mView;
         public TextView mConversationName;
+        public int mIndex;
 
         public ChatConversation mConversation;
 
         public ViewHolder(View view, ChatConversation conversation) {
+            this.mView = view;
             this.mConversation = conversation;
 
             this.mConversationName = view.findViewById(R.id.conversationName);
             this.mConversationName.setText(conversation.title);
+
+            attachClicks();
+        }
+
+        public void attachClicks() {
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, ConversationActivity.class);
+                    intent.putExtra(ConversationActivity.EXTRA_TITLE, mConversation.title);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 
@@ -43,6 +61,8 @@ public class ConversationsAdapter extends ArrayAdapter<ChatConversation> {
         mContext = context;
         mConversations = conversations;
     }
+
+
 
     @Override
     public int getCount() {
@@ -67,7 +87,6 @@ public class ConversationsAdapter extends ArrayAdapter<ChatConversation> {
         }
 
         ViewHolder holder = new ViewHolder(convertView, this.getItem(position));
-
         return convertView;
     }
 }
