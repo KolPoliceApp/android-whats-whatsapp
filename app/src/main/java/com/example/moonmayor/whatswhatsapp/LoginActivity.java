@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.moonmayor.whatswhatsapp.storage.MySharedPreferences;
+
 /**
  * Created by moonmayor on 10/4/17.
  */
@@ -25,8 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // check to see if the user is already logged in
-        SharedPreferences prefs = getSharedPreferences("userinfo", MODE_PRIVATE);
-        String username = prefs.getString("username", null);
+        String username = MySharedPreferences.getUsername(this);
         if (username != null) {
             launchMainActivity();
         }
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initiateLogin();
+                saveUsername();
             }
         });
 
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 // detect if the user presses [enter]
                 if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    initiateLogin();
+                    saveUsername();
                     return true;
                 }
                 return false;
@@ -57,12 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void initiateLogin() {
+    private void saveUsername() {
         String username = mUsernameInput.getText().toString();
-
-        SharedPreferences.Editor prefEditor = getSharedPreferences("userinfo", MODE_PRIVATE).edit();
-        prefEditor.putString("username", username);
-        prefEditor.commit();
+        MySharedPreferences.storeUsername(this, username);
 
         launchMainActivity();
     }

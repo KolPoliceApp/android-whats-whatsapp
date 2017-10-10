@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.moonmayor.whatswhatsapp.adapters.ConversationListAdapter;
 import com.example.moonmayor.whatswhatsapp.mockdata.MockConversations;
 import com.example.moonmayor.whatswhatsapp.models.ChatConversation;
+import com.example.moonmayor.whatswhatsapp.storage.MySharedPreferences;
 
 import java.util.List;
 
@@ -30,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // check to see if the user is already logged in
-        SharedPreferences prefs = getSharedPreferences("userinfo", MODE_PRIVATE);
-        mUsername = prefs.getString("username", null);
+        mUsername = MySharedPreferences.getUsername(this);
         if (mUsername == null) {
             Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(loginIntent);
