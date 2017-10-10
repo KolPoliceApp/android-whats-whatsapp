@@ -1,8 +1,10 @@
 package com.example.moonmayor.whatswhatsapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,20 +29,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // this activity must be started with an intent passing a username.
-        // redirect the user to the LoginActivity if no intent or username is present.
-        Intent intent = getIntent();
-        if (intent == null || intent.getExtras() == null) {
+        // check to see if the user is already logged in
+        SharedPreferences prefs = getSharedPreferences("userinfo", MODE_PRIVATE);
+        mUsername = prefs.getString("username", null);
+        if (mUsername == null) {
             Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(loginIntent);
-
-            // prevent the app from doing anything else if it's launching the Login activity.
             return;
-        } else {
-            usernameTextView = (TextView) findViewById(R.id.usernameDisplay);
-            mUsername = (String) intent.getExtras().get("username");
-            usernameTextView.setText(mUsername);
         }
+
+        usernameTextView = (TextView) findViewById(R.id.usernameDisplay);
+        usernameTextView.setText(mUsername);
 
         attachConversations();
     }

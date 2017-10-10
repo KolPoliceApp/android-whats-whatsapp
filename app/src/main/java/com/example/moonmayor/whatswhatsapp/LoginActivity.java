@@ -1,6 +1,7 @@
 package com.example.moonmayor.whatswhatsapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,6 +24,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // check to see if the user is already logged in
+        SharedPreferences prefs = getSharedPreferences("userinfo", MODE_PRIVATE);
+        String username = prefs.getString("username", null);
+        if (username != null) {
+            launchMainActivity();
+        }
+
         mUsernameInput = (EditText) findViewById(R.id.usernameInput);
         mLoginButton = (Button) findViewById(R.id.loginButton);
         attachClickHandlers();
@@ -39,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         mUsernameInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                Log.d("PRESS", "" + keyEvent.getKeyCode());
                 // detect if the user presses [enter]
                 if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     initiateLogin();
@@ -52,8 +59,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initiateLogin() {
         String username = mUsernameInput.getText().toString();
+
+        SharedPreferences.Editor prefEditor = getSharedPreferences("userinfo", MODE_PRIVATE).edit();
+        prefEditor.putString("username", username);
+        prefEditor.commit();
+
+        launchMainActivity();
+    }
+
+    private void launchMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra("username", username);
         startActivity(intent);
     }
 }
